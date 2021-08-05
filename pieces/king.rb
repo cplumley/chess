@@ -2,7 +2,7 @@ require_relative 'piece'
 require_relative 'stepable'
 
 class King < Piece
-  implements Stepable
+  include Stepable
   
   def symbol
     '♚'
@@ -10,7 +10,7 @@ class King < Piece
 
   protected
 
-  def move_dirs
+  def move_diffs
     
   end
 end

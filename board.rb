@@ -25,6 +25,10 @@ class Board
     true
   end
 
+  def empty?(pos)
+    self[pos].empty?
+  end
+
   def move_piece(start_pos, end_pos)
     raise 'Invalid move!' unless valid_move?(start_pos)
 

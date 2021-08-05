@@ -2,7 +2,7 @@ require_relative 'piece'
 require_relative 'slideable'
 
 class Queen < Piece
-  implements Slideable
+  include Slideable
   
   def symbol
     '♛'

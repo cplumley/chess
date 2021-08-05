@@ -2,8 +2,8 @@ require_relative 'singleton'
 require_relative 'piece'
 
 class Rook < Piece
-  attr_reader :symbol
-  implements Singleton
+  attr_reader :symbol, :color
+  include Singleton
   
   def initialize
     @symbol = " "
