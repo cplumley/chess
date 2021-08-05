@@ -24,7 +24,9 @@ class Display
   end
 
   def colors_for(x, y)
-    if [x, y] == cursor.cursor_pos
+    if [x, y] == cursor.cursor_pos && cursor.selected
+      bg = :yellow
+    elsif [x, y] == cursor.cursor_pos
       bg = :magenta
     elsif (x + y).odd?
       bg = :cyan
