@@ -12,23 +12,15 @@ class Piece
   end
 
   def to_s
-
+    " #{symbol} "
   end
 
   def empty?
     false
   end
 
-  def valid_moves
-
-  end
-
-  def pos=(val)
-
-  end
-
   def symbol
-
+    raise NotImplementedError
   end
 
   private
