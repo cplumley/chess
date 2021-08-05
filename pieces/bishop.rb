@@ -1,8 +1,8 @@
 require_relative 'piece'
 require_relative 'slideable'
 
-class Rook < Piece
-  implements Slideable
+class Bishop < Piece
+  include Slideable
   
   def symbol
     '♝'.colorize(color)
