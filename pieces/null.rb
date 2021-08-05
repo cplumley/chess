@@ -1,13 +1,13 @@
-require_relative 'singleton'
+require 'singleton'
 require_relative 'piece'
 
-class Rook < Piece
+class NullPiece < Piece
   attr_reader :symbol, :color
   include Singleton
   
   def initialize
     @symbol = " "
-    @color = nil
+    @color = :none
   end
 
   def empty?
