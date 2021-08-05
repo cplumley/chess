@@ -14,6 +14,8 @@ class Board
   end
 
   def []=(pos, val)
+    
+    
     row, col = pos
     @rows[row][col] = val
   end
@@ -36,6 +38,18 @@ class Board
     piece = self[start_pos]
     self[start_pos] = nil
     self[end_pos] = piece
+  end
+
+  def valid_pos?(pos)
+    x, y = pos
+    
+    if x < 0 || x > 7
+      return false
+    elsif y < 0 || y > 7
+      return false
+    end
+    
+    true
   end
 
   private
