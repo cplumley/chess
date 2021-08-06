@@ -5,10 +5,16 @@ class Piece
   
   def initialize(color, board, pos)
     @color, @board, @pos = color, board, pos
+
+    board.add_piece(self, pos)
   end
 
   def moves
 
+  end
+
+  def pos=(val)
+    @pos = val
   end
 
   def to_s

@@ -14,17 +14,17 @@ class Board
   end
 
   def []=(pos, val)
-    
-    
     row, col = pos
     @rows[row][col] = val
   end
 
+  def add_piece(piece, pos)
+    raise "Not empty space" unless empty?(pos)
+    self[pos] = piece
+  end
+
   def valid_move?(pos)
-    if self[pos] == nil
-      return false
-    end
-    
+    return false if empty?(pos)
     true
   end
 
@@ -36,8 +36,9 @@ class Board
     raise 'Invalid move!' unless valid_move?(start_pos)
 
     piece = self[start_pos]
-    self[start_pos] = nil
+    self[start_pos] = sentinel
     self[end_pos] = piece
+    piece.pos = end_pos
   end
 
   def valid_pos?(pos)
@@ -52,6 +53,26 @@ class Board
     true
   end
 
+  def pieces
+    @rows.flatten.reject(&:empty?)
+  end
+
+  def find_king(color)
+    king = pieces.find { |p| p.is_a?(King) && p.color == color }
+    king.pos || (raise "King not found")
+  end
+
+  def in_check?(color)
+    king_pos = find_king(color)
+    opp_pieces = pieces.select { |p| p.color != color }
+
+    opp_pieces.each do |p|
+      return true if p.moves.include?(king_pos)
+    end
+
+    false
+  end
+
   private
 
   attr_reader :sentinel
@@ -64,15 +85,13 @@ class Board
     x = color == :white ? 7 : 0
 
     back_pieces.each_with_index do |piece, y|
-      self[[x,y]] = piece.new(color, self, [x,y])
+      piece.new(color, self, [x,y])
     end
   end
 
   def fill_front(color)
     x = color == :white ? 6 : 1
-    8.times do |y| 
-      self[[x,y]] = Pawn.new(color, self, [x,y])
-    end
+    8.times { |y| Pawn.new(color, self, [x,y]) }
   end
 
   def make_starting_grid
