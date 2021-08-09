@@ -1,4 +1,5 @@
 require_relative 'pieces'
+require_relative 'display'
 
 class Board
   attr_reader :rows
@@ -71,6 +72,16 @@ class Board
     end
 
     false
+  end
+
+  def checkmate?(color)
+    return false unless in_check?(color)
+    
+    pieces.each do |piece|
+      return false if piece.valid_move?
+    end
+    
+    true
   end
 
   private

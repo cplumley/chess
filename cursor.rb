@@ -72,7 +72,7 @@ class Cursor
     case key
     when :return, :space
       toggle_selected
-      cursor_pos
+      return cursor_pos
     when :left, :right, :up, :down
       update_pos(MOVES[key])
       return nil

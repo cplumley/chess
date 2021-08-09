@@ -1,6 +1,5 @@
 require 'colorize'
 require_relative 'cursor'
-require_relative 'board'
 
 class Display
   attr_reader :board, :cursor
@@ -8,6 +7,10 @@ class Display
   def initialize (board)
     @board = board
     @cursor = Cursor.new([0,0], board)
+  end
+
+  def get_input
+    cursor.get_input
   end
 
   def build_grid
@@ -36,20 +39,9 @@ class Display
     { background: bg }
   end
 
-  def play
-    loop do
-      render
-      cursor.get_input
-    end
-  end
-
   def render
     system("clear")
     puts "Arrow keys, WASD, or vim to move, space or enter to confirm."
     build_grid.each { |row| puts row.join }
   end
 end
-
-b = Board.new
-game = Display.new(b)
-game.play
